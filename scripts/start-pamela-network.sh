@@ -5,6 +5,20 @@
 
 set -euo pipefail
 
+# ============================================================
+# SECURITY WARNING
+# This script is intended for LOCAL DEVELOPMENT ONLY.
+#
+# - HTTP RPC and WebSocket are bound to 127.0.0.1 (localhost).
+#   Do NOT expose these ports to a public network.
+# - CORS and WebSocket origins are set to '*' for development
+#   convenience. Restrict them in any networked environment.
+# - The sealer account is unlocked with an empty password via
+#   /dev/null. This is safe only on an isolated local machine.
+#   NEVER run this configuration on a shared or internet-facing
+#   host.
+# ============================================================
+
 DATADIR="${PAMELA_DATADIR:-$HOME/.pamela}"
 NETWORK_ID=1313
 HTTP_PORT=8545
@@ -40,12 +54,12 @@ exec geth \
   --datadir "$DATADIR" \
   --networkid "$NETWORK_ID" \
   --http \
-  --http.addr "0.0.0.0" \
+  --http.addr "127.0.0.1" \
   --http.port "$HTTP_PORT" \
   --http.api "eth,net,web3,personal,miner,clique,txpool,debug" \
   --http.corsdomain "*" \
   --ws \
-  --ws.addr "0.0.0.0" \
+  --ws.addr "127.0.0.1" \
   --ws.port "$WS_PORT" \
   --ws.api "eth,net,web3,personal,miner,clique,txpool,debug" \
   --ws.origins "*" \

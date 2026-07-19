@@ -168,7 +168,7 @@ To connect a second node to the Pamela network:
      --datadir ~/.pamela2 \
      --networkid 1313 \
      --port 30314 \
-     --http --http.port 8546 \
+     --http --http.port 8547 \
      --bootnodes "enode://PUBKEY@127.0.0.1:30313"
    ```
 
