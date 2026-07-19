@@ -214,6 +214,26 @@ There are three different solutions depending on your use case:
   * If you want a convenient single node environment for testing, you can use our [Dev Mode](https://geth.ethereum.org/docs/developers/dapp-developer/dev-mode).
   * If you are looking for a multiple node test network, you can set one up quite easily with [Kurtosis](https://geth.ethereum.org/docs/fundamentals/kurtosis).
 
+## Pamela Private Development Network
+
+This repository includes a ready-to-run private Ethereum development network called **Pamela Coin** (Chain ID `1313`). It uses Clique Proof-of-Authority consensus for instant block sealing — no mining hardware or stake required.
+
+See **[docs/PAMELA-NETWORK.md](docs/PAMELA-NETWORK.md)** for full setup instructions.
+
+**Quick start:**
+
+```shell
+# 1. Initialize the genesis block (run once)
+./scripts/init-pamela-network.sh
+
+# 2. Start your private node
+./scripts/start-pamela-network.sh
+```
+
+Five development accounts are pre-funded with 1,000,000 ETH each. Their addresses and private keys are listed in [devaccounts/README.md](devaccounts/README.md).
+
+> ⚠️ The development accounts and network configuration are for **local development only**. Never use these keys on mainnet or any public network.
+
 ## Contribution
 
 Thank you for considering helping out with the source code! We welcome contributions
