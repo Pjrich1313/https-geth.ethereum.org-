@@ -52,6 +52,7 @@ Built packages are placed in the dist/ directory.
 ## Exporting a Historical Commit
 
 To capture a patch for a commit from a specific month and compare it to the current tree:
+The lookup scans every reachable ref, so it can return a commit from either a branch or a tag.
 
     $ H=$(git rev-list --all -1 --since="2024-07-01 00:00:00" --until="2024-08-01 00:00:00")
     $ echo "Using commit from any branch/tag: $H"
