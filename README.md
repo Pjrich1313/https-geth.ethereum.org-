@@ -1,12 +1,14 @@
-## Go Ethereum
+## Pjrich1313 Coin
+
+> A personal fork of Go Ethereum by Pamela (Pjrich1313)
 
 Golang execution layer implementation of the Ethereum protocol.
 
 [![API Reference](
-https://pkg.go.dev/badge/github.com/ethereum/go-ethereum
-)](https://pkg.go.dev/github.com/ethereum/go-ethereum?tab=doc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/ethereum/go-ethereum)](https://goreportcard.com/report/github.com/ethereum/go-ethereum)
-[![Travis](https://app.travis-ci.com/ethereum/go-ethereum.svg?branch=master)](https://app.travis-ci.com/github/ethereum/go-ethereum)
+https://pkg.go.dev/badge/github.com/Pjrich1313/https-geth.ethereum.org-
+)](https://pkg.go.dev/github.com/Pjrich1313/https-geth.ethereum.org-?tab=doc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Pjrich1313/https-geth.ethereum.org-)](https://goreportcard.com/report/github.com/Pjrich1313/https-geth.ethereum.org-)
+[![Travis](https://app.travis-ci.com/Pjrich1313/https-geth.ethereum.org-.svg?branch=master)](https://app.travis-ci.com/github/Pjrich1313/https-geth.ethereum.org-)
 [![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/nthXNEv)
 [![Twitter](https://img.shields.io/twitter/follow/go_ethereum)](https://x.com/go_ethereum)
 
@@ -32,7 +34,7 @@ make all
 
 ## Executables
 
-The go-ethereum project comes with several wrappers/executables found in the `cmd`
+The Pjrich1313/https-geth.ethereum.org- project comes with several wrappers/executables found in the `cmd`
 directory.
 
 |  Command   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -217,7 +219,7 @@ There are three different solutions depending on your use case:
 Thank you for considering helping out with the source code! We welcome contributions
 from anyone on the internet, and are grateful for even the smallest of fixes!
 
-If you'd like to contribute to go-ethereum, please fork, fix, commit and send a pull request
+If you'd like to contribute to Pjrich1313/https-geth.ethereum.org-, please fork, fix, commit and send a pull request
 for the maintainers to review and merge into the main code base. If you wish to submit
 more complex changes though, please check up with the core devs first on [our Discord Server](https://discord.gg/invite/nthXNEv)
 to ensure those changes are in line with the general philosophy of the project and/or get
@@ -241,15 +243,15 @@ testing procedures.
 ### Contributing to geth.ethereum.org
 
 For contributions to the [go-ethereum website](https://geth.ethereum.org), please checkout and raise pull requests against the `website` branch.
-For more detailed instructions please see the `website` branch [README](https://github.com/ethereum/go-ethereum/tree/website#readme) or the 
+For more detailed instructions please see the `website` branch [README](https://github.com/Pjrich1313/https-geth.ethereum.org-/tree/website#readme) or the 
 [contributing](https://geth.ethereum.org/docs/developers/geth-developer/contributing) page of the website.
 
 ## License
 
-The go-ethereum library (i.e. all code outside of the `cmd` directory) is licensed under the
+The Pjrich1313/https-geth.ethereum.org- library (i.e. all code outside of the `cmd` directory) is licensed under the
 [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html),
 also included in our repository in the `COPYING.LESSER` file.
 
-The go-ethereum binaries (i.e. all code inside of the `cmd` directory) are licensed under the
+The Pjrich1313/https-geth.ethereum.org- binaries (i.e. all code inside of the `cmd` directory) are licensed under the
 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html), also
 included in our repository in the `COPYING` file.

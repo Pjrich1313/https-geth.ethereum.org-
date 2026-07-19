@@ -1,4 +1,4 @@
-module github.com/ethereum/go-ethereum
+module github.com/Pjrich1313/https-geth.ethereum.org-
 
 go 1.24.0
 

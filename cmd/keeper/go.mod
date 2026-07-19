@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/ProjectZKM/Ziren/crates/go-runtime/zkvm_runtime v0.0.0-20251001021608-1fe7b43fc4d6
-	github.com/ethereum/go-ethereum v0.0.0-00010101000000-000000000000
+	github.com/Pjrich1313/https-geth.ethereum.org- v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -44,4 +44,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/ethereum/go-ethereum => ../../
+replace github.com/Pjrich1313/https-geth.ethereum.org- => ../../
