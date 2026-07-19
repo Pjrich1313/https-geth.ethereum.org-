@@ -13,8 +13,9 @@ Pamela Coin is a private Ethereum-compatible development blockchain built on top
 | Consensus          | Clique PoA (Proof of Authority)            |
 | Block time         | 5 seconds                                  |
 | Gas limit (genesis)| 8,000,000                                  |
-| HTTP RPC           | `http://localhost:8545`                    |
-| WebSocket          | `ws://localhost:8546`                      |
+| HTTP RPC           | `http://localhost:8545` (unauthenticated, localhost only) |
+| WebSocket          | `ws://localhost:8546`   (unauthenticated, localhost only) |
+| Auth RPC (JWT)     | `http://localhost:8551` (JWT-protected)    |
 | P2P port           | `30313`                                    |
 
 ---
@@ -40,7 +41,69 @@ This writes the Pamela genesis block into `~/.pamela/` (or the directory set by 
 ./scripts/start-pamela-network.sh
 ```
 
-The node starts with HTTP RPC, WebSocket, and the interactive JavaScript console enabled.
+The node starts with HTTP RPC, WebSocket, and the interactive JavaScript console enabled. It also starts a **JWT-protected Auth RPC** endpoint on port `8551`.
+
+---
+
+## Authenticated RPC (JWT token)
+
+The node exposes a second RPC endpoint on **port 8551** that requires a JWT bearer token. This is the recommended endpoint to use from your application code — it rejects unauthenticated callers.
+
+### How it works
+
+A 32-byte hex secret (`~/.pamela/jwt.hex`) is generated automatically by `init-pamela-network.sh`. The start script passes this secret to geth via `--authrpc.jwtsecret`. Every request to port 8551 must include a signed JWT in the `Authorization` HTTP header (scheme: `****** <token>`), generated from that secret.
+
+### Get a token
+
+```bash
+./scripts/show-rpc-token.sh
+# eyJhbGci... (copy this value)
+```
+
+Tokens are valid for **60 seconds**. Run the script again whenever you need a fresh one.
+
+### Make an authenticated call (curl)
+
+```bash
+TOKEN=$(./scripts/show-rpc-token.sh)
+curl -X POST http://localhost:8551 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: ****** <paste-token-here>" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+```
+
+### Use with Foundry / cast
+
+```bash
+TOKEN=$(./scripts/show-rpc-token.sh)
+cast block-number \
+  --rpc-url http://localhost:8551 \
+  --jwt-secret ~/.pamela/jwt.hex
+```
+
+### Use with ethers.js
+
+```js
+const { ethers } = require("ethers");
+const { execSync } = require("child_process");
+
+const token = execSync("./scripts/show-rpc-token.sh").toString().trim();
+const provider = new ethers.JsonRpcProvider("http://localhost:8551", undefined, {
+  headers: { Authorization: "Bearer " + token },
+});
+```
+
+### Rotate the JWT secret
+
+To issue a new secret (invalidates all existing tokens):
+
+```bash
+openssl rand -hex 32 > ~/.pamela/jwt.hex
+chmod 600 ~/.pamela/jwt.hex
+# Restart the node for the new secret to take effect
+```
+
+---
 
 ### 3. Connect via RPC
 
