@@ -57,16 +57,33 @@ This creates the genesis block and writes the initial chain state under `~/.pame
 
 ### 2. Import the sealer account
 
-Import account `0` (the Clique sealer) into geth's keystore so the node can sign blocks:
+Import account `0` (the Clique sealer) into geth's keystore so the node can sign blocks.
+Write the private key to a temporary file, import it, then delete the file:
 
 ```sh
-geth account import --datadir ~/.pamela <(echo -n "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80")
+echo "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80" > /tmp/pamela-sealer.key
+chmod 600 /tmp/pamela-sealer.key
+geth account import --datadir ~/.pamela /tmp/pamela-sealer.key
+rm /tmp/pamela-sealer.key
 ```
 
 Enter a password when prompted (use something simple like `pamela` for dev). Note the
 address printed — it should be `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`.
 
 ### 3. Start the Pamela node
+
+Create a plain-text password file for the sealer account (dev use only):
+
+```sh
+echo "pamela" > ~/.pamela/password.txt
+chmod 600 ~/.pamela/password.txt
+```
+
+> **⚠️ NOTE** — The flags below open the HTTP/WS RPC servers on all network interfaces
+> (`0.0.0.0`) with a wildcard CORS policy. This is convenient for local development (e.g.
+> connecting MetaMask or a local front-end) but **must not be used in any environment
+> reachable from untrusted networks**. For a machine accessible from the internet, replace
+> `0.0.0.0` with `127.0.0.1` and set `--http.corsdomain` to your specific origin.
 
 ```sh
 geth \
@@ -82,7 +99,7 @@ geth \
   --ws.addr 0.0.0.0 \
   --ws.port 8546 \
   --unlock 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 \
-  --password <(echo "pamela") \
+  --password ~/.pamela/password.txt \
   --mine \
   --miner.etherbase 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 \
   console
