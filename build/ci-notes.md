@@ -48,3 +48,17 @@ Built packages are placed in the dist/ directory.
 
     $ cd ..
     $ dpkg-deb -c geth-unstable_1.9.6+bionic_amd64.deb
+
+## Exporting a Historical Commit
+
+To capture a patch for a commit from a specific month and compare it to the current tree:
+The lookup scans every reachable ref, so it can return a commit from either a branch or a tag.
+
+    $ H=$(git rev-list --all -1 --since="2024-07-01 00:00:00" --until="2024-08-01 00:00:00")
+    $ echo "Using commit from any branch/tag: $H"
+    $ [ -z "$H" ] && echo "No commit found in July 2024 across all refs." && exit 1
+    $ git cat-file -e "$H^{commit}" || { echo "Invalid commit: $H"; exit 1; }
+    $ git show --stat --patch "$H" | head -200
+    $ git format-patch -1 "$H" --stdout > "july-2024-$H.patch"
+    $ git diff "$H..HEAD" > "july-2024-$H-to-HEAD.diff"
+    $ ls -lh "july-2024-$H.patch" "july-2024-$H-to-HEAD.diff"
